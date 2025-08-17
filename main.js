@@ -3,7 +3,7 @@ const ui = {
 }
 
 function init () {
-	ui.launchButton = document.getElementById("launchRocket");
+	ui.launchButton = get("launchRocket");
 
 	updateDisplay();
 }
@@ -13,7 +13,7 @@ window.addEventListener('DOMContentLoaded', init);
 function updateResources () {
 	state.config.resources.forEach(resource => {
 		const displayName = capitalize(resource);
-		set(resource, `${displayName}: ${state.game.[resource]}`);
+		set(resource, `${displayName}: ${state.game[resource]}`);
 	});
 }
 

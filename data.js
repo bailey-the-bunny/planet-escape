@@ -1,4 +1,4 @@
-const state {
+const state = {
 	// Game data to be saved :)
 	game: {
 		rocks: 0,

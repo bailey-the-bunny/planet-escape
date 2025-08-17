@@ -2,8 +2,12 @@ function rollDie (faces = 6) {
 	return Math.floor((Math.random() * faces) + 1);
 }
 
+function get (element) {
+	return document.getElementById(element);
+}
+
 function set (element, text) {
-	document.getElementById(element).innerHTML = text;
+	get(element).innerHTML = text;
 }
 
 function newInfo (text) {
