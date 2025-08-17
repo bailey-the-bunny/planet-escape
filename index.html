@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Planet Escape</title>
+
+	<!--
+		So, basically I want this game to kinda be like The Planet Crafter.
+		But every time you open it, there is a new planet generated.
+		It takes about 20 minutes to escape, and it is a fun little incremental challenge.
+		:D
+	-->
+
+	<link rel = "stylesheet" href = "styles.css">
+
+</head>
+<body style = "background-color: black;">
+	<!-- Header -->
+	<div>
+		<h1>Planet Escape :)</h1>
+		<p>Your goal: build a rocket and escape the planet!</p>
+		<br>
+		<p id = "info" style = "font-style: italic;">It's dark and lonely...</p>
+	</div>
+
+	<!-- Main -->
+	<div>
+		<button onclick = "findRocks()">Find Rocks</button>
+		<button onclick = "pickUpRocks()">Pick Up Rocks</button>
+		<button onclick = "breakRocks()">Break Rocks</button>
+	</div>
+
+	<!-- Inventory -->
+	<div>
+		<p id = "rocks">Rocks: 0</p>
+		<br>
+		<p id = "coal">Coal: 0</p>
+		<p id = "iron">Iron: 0</p>
+		<p id = "quartz">Quartz: 0</p>
+	</div>
+
+	<!-- JavaScript -->
+	<script src = "helpers.js"></script>
+
+	<script src = "main.js"></script>
+</body>
+</html>

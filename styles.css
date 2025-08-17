@@ -1,0 +1,14 @@
+* {
+	color: white;
+}
+
+div {
+	padding: 5px;
+	margin: 5px;
+	background-color: midnightBlue;
+}
+
+button {
+	background-color: darkGoldenRod;
+	color: midnightBlue;
+}
