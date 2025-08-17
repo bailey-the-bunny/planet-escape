@@ -7,13 +7,17 @@ function get (element) {
 }
 
 function set (element, text) {
-	get(element).innerHTML = text;
+	get(element).textContent = text;
 }
 
 function newInfo (text) {
-	set("info", text)
+	ui.infoText.textContent = text;
 	
-	//Make it noticable that the info was updated even if it is with the same text :)
+	ui.infoText.classList.add("info-updated");
+
+	setTimeout(() => {
+		ui.infoText.classList.remove("info-updated");
+	}, 500);
 }
 
 function chooseRandom (array) {
@@ -22,4 +26,28 @@ function chooseRandom (array) {
 
 function capitalize (text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+function addClick (element, functionName) {
+	ui[element].addEventListener("click", () => handleGameAction(functionName));
+}
+
+function canAfford(costs) {
+    for (const resource in costs) {
+        if (state.game[resource] < costs[resource]) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function handleGameAction(action) {
+    const message = action();
+    
+    if (message) {
+        newInfo(message);
+    }
+    
+    updateDisplay();
 }

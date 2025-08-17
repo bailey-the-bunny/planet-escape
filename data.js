@@ -12,21 +12,31 @@ const state = {
 	// Session data which is temporary
 	session: {
 		foundRocks: 0
-	},
-
-	// Constants for defining the game's rules / balancing
-	config: {
-		resources: ["rocks", "coal", "iron", "quartz"],
-		rocketIronCost: 5,
-		rocketQuartzCost: 5,
-		rocketFuelCost: 5
 	}
 }
 
+// Constants for defining the game's rules / balancing
+config = {
+	resources: ["rocks", "coal", "iron", "quartz"],
+	rockRewards: ["coal", "iron", "quartz"],
+
+	rocketCost: {
+        iron: 5,
+        quartz: 5
+    },
+
+    launchCost: {
+        coal: 5
+    }
+}
+
 const ui = {
-	launchButton: null,
+	infoText: null,
 
 	findRocksButton: null,
 	pickUpRocksButton: null,
-	breakRocksButton: null
+	breakRocksButton: null,
+
+	buildRocketButton: null,
+	launchButton: null
 }
