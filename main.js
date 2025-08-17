@@ -43,29 +43,28 @@ function breakRocks () {
 	if (rocks) {
 		rocks -= 1;
 
-		let rewardType = rollDie(3);
+		const rewardOptions = ["coal", "iron", "quartz"];
+
+		let rewardType = rewardOptions[rollDie(3) - 1];
 		let rewardId = "";
 		let rewardAmount = rollDie(2);
 
 		switch (rewardType) {
-			case 1:
-				rewardId = "coal"
+			case "coal":
 				coal += rewardAmount;
 				set("coal", "Coal: " + coal)
 				break;
-			case 2:
-				rewardId = "iron"
+			case "iron":
 				iron += rewardAmount;
 				set("iron", "Iron: " + iron)
 				break;
-			case 3:
-				rewardId = "quartz"
+			case "quartz":
 				quartz += rewardAmount;
 				set("quartz", "Quartz: " + quartz)
 				break;
 		}
 
-		let reward = rewardAmount + " " + rewardId;
+		let reward = rewardAmount + " " + rewardType;
 		newInfo("You were able to extract " + reward + " from inside :3");
 
 		set("rocks", "Rocks: " + rocks);
