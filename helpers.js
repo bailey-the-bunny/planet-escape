@@ -1,18 +1,18 @@
-function rollDie (faces = 6) {
-	return Math.floor((Math.random() * faces) + 1);
+function rollDie(faces = 6) {
+	return Math.floor(Math.random() * faces + 1);
 }
 
-function get (element) {
+function get(element) {
 	return document.getElementById(element);
 }
 
-function set (element, text) {
+function set(element, text) {
 	get(element).textContent = text;
 }
 
-function newInfo (text) {
+function newInfo(text) {
 	ui.infoText.textContent = text;
-	
+
 	ui.infoText.classList.add("info-updated");
 
 	setTimeout(() => {
@@ -20,34 +20,34 @@ function newInfo (text) {
 	}, 500);
 }
 
-function chooseRandom (array) {
+function chooseRandom(array) {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
-function capitalize (text) {
+function capitalize(text) {
 	return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-function addClick (element, functionName) {
-	ui[element].addEventListener("click", () => handleGameAction(functionName));
+function addClick(uiKey, actionFunction) {
+	ui[uiKey].addEventListener("click", () => handleGameAction(actionFunction));
 }
 
 function canAfford(costs) {
-    for (const resource in costs) {
-        if (state.game[resource] < costs[resource]) {
-            return false;
-        }
-    }
+	for (const resource in costs) {
+		if (state.game[resource] < costs[resource]) {
+			return false;
+		}
+	}
 
-    return true;
+	return true;
 }
 
 function handleGameAction(action) {
-    const message = action();
-    
-    if (message) {
-        newInfo(message);
-    }
-    
-    updateDisplay();
+	const message = action();
+
+	if (message) {
+		newInfo(message);
+	}
+
+	updateDisplay();
 }

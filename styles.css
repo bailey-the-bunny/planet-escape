@@ -1,5 +1,18 @@
-* {
+@font-face {
+	font-family: "Electrolize";
+	src: url("fonts/Electrolize-Regular.ttf") format("truetype");
+}
+
+@font-face {
+	font-family: "Iceland";
+	src: url("fonts/Iceland-Regular.ttf") format("truetype");
+}
+
+body {
+	font-family: "Iceland", sans-serif;
 	color: white;
+	background-color: black;
+	touch-action: manipulation;
 }
 
 div {
@@ -9,15 +22,32 @@ div {
 }
 
 button {
+	font-family: "Iceland", sans-serif;
 	background-color: darkGoldenRod;
 	color: midnightBlue;
 }
 
+.actions-panel h2 {
+	display: none;
+}
+
+.info-display {
+	font-style: italic;
+}
+
 .info-updated {
-    animation: flash 0.5s ease-out;
+	animation: flash 0.5s ease-out;
+}
+
+.inventory-item {
+	margin: 2px;
 }
 
 @keyframes flash {
-    0% { color: yellow; }
-    100% { color: white; }
+	0% {
+		color: yellow;
+	}
+	100% {
+		color: white;
+	}
 }

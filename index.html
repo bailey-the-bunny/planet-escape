@@ -1,51 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Planet Escape</title>
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Planet Escape</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-	<!--
+		<!--
 		So, basically I want this game to kinda be like The Planet Crafter.
 		But every time you open it, there is a new planet generated.
 		It takes about 20 minutes to escape, and it is a fun little incremental challenge.
 		:D
 	-->
 
-	<link rel = "stylesheet" href = "styles.css">
-</head>
-<body style = "background-color: black;">
-	<!-- Header -->
-	<div>
-		<h1> Planet Escape :) </h1>
-		<p> Your goal: build a rocket and escape the planet! </p>
-		<br>
-		<p id = "info" style = "font-style: italic;"> It's dark and lonely... </p>
-	</div>
+		<link rel="stylesheet" href="styles.css" />
 
-	<!-- Main -->
-	<div>
-		<button id = "findRocksButton"> Find Rocks </button>
-		<button id = "pickUpRocksButton"> Pick Up Rocks </button>
-		<button id = "breakRocksButton"> Break Rocks </button>
-		<button id = "rocketBuilderButton"> Build The Rocket </button>
+		<script src="helpers.js" defer></script>
+		<script src="data.js" defer></script>
+		<script src="game.js" defer></script>
+		<script src="main.js" defer></script>
+	</head>
+	<body>
+		<header>
+			<div>
+				<h1>Planet Escape :)</h1>
+				<p>Your goal: build a rocket and escape the planet!</p>
+				<p id="info" class="info-display">It's dark and lonely...</p>
+			</div>
+		</header>
 
-		<br>
+		<main>
+			<section class="actions-panel">
+				<div>
+					<h2>Actions</h2>
+					<button
+						id="findRocksButton"
+						title="Look around for rocks. You might find 1, 2, or 3 :)"
+					>
+						Find Rocks
+					</button>
+					<button
+						id="pickUpRocksButton"
+						title="Add one of the nearby rocks to your inventory."
+					>
+						Pick Up Rocks
+					</button>
+					<button
+						id="breakRocksButton"
+						title="Break an inventory rock to extract *valuable* resources!"
+					>
+						Break Rocks
+					</button>
+					<button
+						id="rocketBuilderButton"
+						title="Requirements: 5 Iron and 5 Quartz."
+					>
+						Build The Rocket
+					</button>
+					<button
+						id="launchRocket"
+						title="Requirement: 5 Coal (for fuel). Extra coal = extra points!"
+					>
+						Launch The Rocket!
+					</button>
+				</div>
+			</section>
 
-		<button id = "launchRocket"> Launch The Rocket! </button>
-	</div>
-
-	<!-- Inventory -->
-	<div>
-		<p id = "rocks">Rocks: 0</p>
-		<br>
-		<p id = "coal">Coal: 0</p>
-		<p id = "iron">Iron: 0</p>
-		<p id = "quartz">Quartz: 0</p>
-	</div>
-
-	<!-- JavaScript -->
-	<script src = "helpers.js"></script>
-	<script src = "data.js"></script>
-	<script src = "game.js"></script>
-	<script src = "main.js"></script>
-</body>
+			<section class="inventory-panel">
+				<div>
+					<h2>Inventory</h2>
+					<p id="rocks" class="inventory-item">Rocks: 0</p>
+					<p id="coal" class="inventory-item">Coal: 0</p>
+					<p id="iron" class="inventory-item">Iron: 0</p>
+					<p id="quartz" class="inventory-item">Quartz: 0</p>
+				</div>
+			</section>
+		</main>
+	</body>
 </html>

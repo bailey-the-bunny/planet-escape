@@ -1,4 +1,4 @@
-function init () {
+function init() {
 	ui.infoText = get("info");
 
 	ui.launchButton = get("launchRocket");
@@ -18,15 +18,17 @@ function init () {
 
 window.addEventListener("DOMContentLoaded", init);
 
-function updateResources () {
-	config.resources.forEach(resource => {
+function updateResources() {
+	config.resources.forEach((resource) => {
 		const displayName = capitalize(resource);
 		set(resource, `${displayName}: ${state.game[resource]}`);
 	});
 }
 
-function updateButtons () {
-	ui.launchButton.style.display = state.game.rocketBuilt ? "inline-block" : "none";
+function updateButtons() {
+	ui.launchButton.style.display = state.game.rocketBuilt
+		? "inline-block"
+		: "none";
 }
 
 function updateDisplay() {

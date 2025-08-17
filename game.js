@@ -1,11 +1,11 @@
-function findRocks () {
+function findRocks() {
 	state.session.foundRocks = rollDie(3);
 
 	const rocks = state.session.foundRocks;
 	return `You see ${rocks} rock${rocks === 1 ? "" : "s"} nearby...`;
 }
 
-function pickUpRocks () {
+function pickUpRocks() {
 	if (!state.session.foundRocks) {
 		return "You don't see any nearby rocks...";
 	}
@@ -20,7 +20,7 @@ function pickUpRocks () {
 	return "You've picked up all the nearby rocks.";
 }
 
-function breakRocks () {
+function breakRocks() {
 	if (!state.game.rocks) {
 		return "You haven't found any rocks to break!";
 	}
@@ -37,7 +37,7 @@ function breakRocks () {
 	return `You were able to extract ${reward} from inside a rock :3`;
 }
 
-function buildTheRocket () {
+function buildTheRocket() {
 	if (state.game.rocketBuilt) {
 		return "You have already built it, silly!";
 	}
@@ -47,14 +47,14 @@ function buildTheRocket () {
 	}
 
 	state.game.iron -= config.rocketCost.iron;
-    state.game.quartz -= config.rocketCost.quartz;
+	state.game.quartz -= config.rocketCost.quartz;
 
 	state.game.rocketBuilt = true;
-	
+
 	return "You have built the rocket!";
 }
 
-function launchRocket () {
+function launchRocket() {
 	if (!canAfford(config.launchCost)) {
 		return "Not enough coal (fuel) to launch the rocket!";
 	}
