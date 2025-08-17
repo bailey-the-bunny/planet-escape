@@ -1,8 +1,18 @@
+// Variables
+
 foundRocks = 0;
 rocks = 0;
 iron = 0;
 quartz = 0;
 coal = 0;
+
+rocketBuilt = false;
+
+// Setup
+
+document.getElementById("launchRocket").style.display = "none";
+
+// Functions
 
 function findRocks () {
 	foundRocks = rollDie(3);
@@ -57,5 +67,31 @@ function breakRocks () {
 
 		let reward = rewardAmount + " " + rewardId;
 		newInfo("You were able to extract " + reward + " from inside :3");
+
+		set("rocks", "Rocks: " + rocks);
+	}
+}
+
+function buildTheRocket () {
+	if (iron >= 5 && quartz >= 5) {
+		iron -= 5;
+		quartz -= 5;
+
+		set("iron", "Iron: " + iron);
+		set("quartz", "Quartz: " + quartz);
+		newInfo("You have built the rocket!");
+
+		rocketBuilt = true;
+		document.getElementById("launchRocket").style.display = "inline-block";
+	}
+}
+
+function launchRocket () {
+	if (coal >= 5) {
+		let score = coal;
+		coal -= 5;
+
+		set("coal", "Coal: " + coal);
+		newInfo("You beat the game! Score: " + score)
 	}
 }

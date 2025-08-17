@@ -1,0 +1,4 @@
+So far I have added the ability to look for rocks, pick them up, and break them.
+Breaking them gives you 1-2 coal, iron or quartz.
+My plan is that coal is used for fuel, iron is used for structures,
+and quartz is used for electronics :D
