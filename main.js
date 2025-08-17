@@ -1,17 +1,24 @@
-updateDisplay();
+const ui = {
+	launchButton: null
+}
+
+function init () {
+	ui.launchButton = document.getElementById("launchRocket");
+
+	updateDisplay();
+}
+
+window.addEventListener('DOMContentLoaded', init);
 
 function updateResources () {
-	const Resources = ["rocks", "coal", "iron", "quartz"]
-
-	Resources.forEach(resource => {
+	state.config.resources.forEach(resource => {
 		const displayName = capitalize(resource);
-		set(resource, `${displayName}: ${Game[resource]}`);
+		set(resource, `${displayName}: ${state.game.[resource]}`);
 	});
 }
 
 function updateButtons () {
-	let rocketLaunchButton = document.getElementById("launchRocket");
-	rocketLaunchButton.style.display = Game.rocketBuilt ? "inline-block" : "none";
+	ui.launchButton.style.display = state.game.rocketBuilt ? "inline-block" : "none";
 }
 
 function updateDisplay() {
@@ -20,23 +27,23 @@ function updateDisplay() {
 }
 
 function findRocks () {
-	Session.foundRocks = rollDie(3);
+	state.session.foundRocks = rollDie(3);
 
-	if (Session.foundRocks == 1) {
+	if (state.session.foundRocks == 1) {
 		set("info", "You see 1 rock nearby...")
 	}
 
 	else {
-		set("info", `You see ${Session.foundRocks} rocks nearby...`)
+		set("info", `You see ${state.session.foundRocks} rocks nearby...`)
 	}
 }
 
 function pickUpRocks () {
-	if (Session.foundRocks) {
-		Session.foundRocks -= 1;
-		Game.rocks += 1;
+	if (state.session.foundRocks) {
+		state.session.foundRocks -= 1;
+		state.game.rocks += 1;
 
-		if (!Session.foundRocks) {
+		if (!state.session.foundRocks) {
 			newInfo("You've picked up all the nearby rocks.");
 		}
 
@@ -45,8 +52,8 @@ function pickUpRocks () {
 }
 
 function breakRocks () {
-	if (Game.rocks) {
-		Game.rocks -= 1;
+	if (state.game.rocks) {
+		state.game.rocks -= 1;
 
 		const RewardOptions = ["coal", "iron", "quartz"];
 
@@ -54,7 +61,7 @@ function breakRocks () {
 		let rewardId = "";
 		let rewardAmount = rollDie(2);
 
-		Game[rewardType] += rewardAmount;
+		state.game[rewardType] += rewardAmount;
 
 		let reward = rewardAmount + " " + rewardType;
 		newInfo(`You were able to extract ${reward} from inside :3`);
@@ -64,13 +71,14 @@ function breakRocks () {
 }
 
 function buildTheRocket () {
-	if (Game.iron >= Config.RocketIronCost && Game.quartz >= Config.RocketQuartzCost) {
-		Game.iron -= Config.RocketIronCost;
-		Game.quartz -= Config.RocketQuartzCost;
+	if (state.game.iron >= state.config.rocketIronCost 
+		&& state.game.quartz >= state.config.rocketQuartzCost) {
+		state.game.iron -= state.config.rocketIronCost;
+		state.game.quartz -= state.config.rocketQuartzCost;
 
 		newInfo("You have built the rocket!");
 
-		Game.rocketBuilt = true;
+		state.game.rocketBuilt = true;
 		
 
 		updateDisplay();
@@ -78,9 +86,9 @@ function buildTheRocket () {
 }
 
 function launchRocket () {
-	if (Game.coal >= Config.RocketFuelCost) {
-		let score = Game.coal;
-		Game.coal -= Config.RocketFuelCost;
+	if (state.game.coal >= state.config.rocketFuelCost) {
+		let score = state.game.coal;
+		state.game.coal -= state.config.rocketFuelCost;
 
 		newInfo("You beat the game! Score: " + score)
 
