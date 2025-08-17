@@ -8,6 +8,12 @@ coal = 0;
 
 rocketBuilt = false;
 
+// Constants
+
+const RocketIronCost = 5;
+const RocketQuartzCost = 5;
+const RocketFuelCost = 5;
+
 // Setup
 
 document.getElementById("launchRocket").style.display = "none";
@@ -43,9 +49,9 @@ function breakRocks () {
 	if (rocks) {
 		rocks -= 1;
 
-		const rewardOptions = ["coal", "iron", "quartz"];
+		const RewardOptions = ["coal", "iron", "quartz"];
 
-		let rewardType = rewardOptions[rollDie(3) - 1];
+		let rewardType = chooseRandom(RewardOptions);
 		let rewardId = "";
 		let rewardAmount = rollDie(2);
 
@@ -72,9 +78,9 @@ function breakRocks () {
 }
 
 function buildTheRocket () {
-	if (iron >= 5 && quartz >= 5) {
-		iron -= 5;
-		quartz -= 5;
+	if (iron >= RocketIronCost && quartz >= RocketQuartzCost) {
+		iron -= RocketIronCost;
+		quartz -= RocketQuartzCost;
 
 		set("iron", "Iron: " + iron);
 		set("quartz", "Quartz: " + quartz);
@@ -86,9 +92,9 @@ function buildTheRocket () {
 }
 
 function launchRocket () {
-	if (coal >= 5) {
+	if (coal >= RocketFuelCost) {
 		let score = coal;
-		coal -= 5;
+		coal -= RocketFuelCost;
 
 		set("coal", "Coal: " + coal);
 		newInfo("You beat the game! Score: " + score)

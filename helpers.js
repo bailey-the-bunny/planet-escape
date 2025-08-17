@@ -6,12 +6,12 @@ function set (element, text) {
 	document.getElementById(element).innerHTML = text;
 }
 
-// Glow Effect
-
-let info = document.getElementById("info");
-
 function newInfo (text) {
 	set("info", text)
 	
 	//Make it noticable that the info was updated even if it is with the same text :)
+}
+
+function chooseRandom (array) {
+	return array[Math.floor(Math.random() * array.length)];
 }
