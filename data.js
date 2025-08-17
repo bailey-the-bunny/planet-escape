@@ -22,3 +22,11 @@ const state = {
 		rocketFuelCost: 5
 	}
 }
+
+const ui = {
+	launchButton: null,
+
+	findRocksButton: null,
+	pickUpRocksButton: null,
+	breakRocksButton: null
+}

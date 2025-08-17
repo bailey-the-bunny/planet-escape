@@ -1,9 +1,12 @@
-const ui = {
-	launchButton: null
-}
-
 function init () {
 	ui.launchButton = get("launchRocket");
+	ui.findRocksButton = get("findRocksButton");
+	ui.pickUpRocksButton = get("pickUpRocksButton");
+	ui.breakRocksButton = get("breakRocksButton");
+
+	ui.findRocksButton.addEventListener("click", handleFindRocksClick);
+	ui.pickUpRocksButton.addEventListener("click", handlePickUpRocksClick);
+	ui.breakRocksButton.addEventListener("click", handleBreakRocksClick);
 
 	updateDisplay();
 }
@@ -30,12 +33,24 @@ function findRocks () {
 	state.session.foundRocks = rollDie(3);
 
 	if (state.session.foundRocks == 1) {
-		set("info", "You see 1 rock nearby...")
+		return("You see 1 rock nearby...");
 	}
 
 	else {
-		set("info", `You see ${state.session.foundRocks} rocks nearby...`)
+		return(`You see ${state.session.foundRocks} rocks nearby...`);
 	}
+}
+
+function handlePickUpRocksClick () {
+	const message = pickUpRocks();
+	newInfo(message);
+	updateDisplay();
+}
+
+function handleFindRocksClick () {
+	const message = findRocks();
+	newInfo(message);
+	updateDisplay();
 }
 
 function pickUpRocks () {
@@ -44,14 +59,30 @@ function pickUpRocks () {
 		state.game.rocks += 1;
 
 		if (!state.session.foundRocks) {
-			newInfo("You've picked up all the nearby rocks.");
+			return("You've picked up all the nearby rocks.");
 		}
 
-		updateDisplay();
+		else {
+			return("Picked up a rock.")
+		}
+	}
+
+	else {
+		return("You don't see any nearby rocks...")
 	}
 }
 
+function handleBreakRocksClick () {
+	const message = breakRocks();
+	newInfo(message);
+	updateDisplay();
+}
+
 function breakRocks () {
+	if (!state.game.rocks) {
+		return "You haven't found any rocks to break!";
+	}
+
 	if (state.game.rocks) {
 		state.game.rocks -= 1;
 
@@ -64,9 +95,8 @@ function breakRocks () {
 		state.game[rewardType] += rewardAmount;
 
 		let reward = rewardAmount + " " + rewardType;
-		newInfo(`You were able to extract ${reward} from inside :3`);
 
-		updateDisplay();
+		return (`You were able to extract ${reward} from inside a rock :3`);
 	}
 }
 
