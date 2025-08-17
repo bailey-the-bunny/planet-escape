@@ -7,9 +7,9 @@ const Game = {
 	rocketBuilt: false
 };
 
-// Variables
-
-foundRocks = 0;
+const GameState = {
+	foundRocks: 0;
+}
 
 // Constants
 
@@ -20,14 +20,14 @@ const RocketFuelCost = 5;
 // Functions
 
 function updateDisplay () {
-	set("rocks", "Rocks: " + game.rocks);
-	set("coal", "Coal: " + game.coal);
-	set("iron", "Iron: " + game.iron);
-	set("quartz", "Quartz: " + game.quartz);
+	set("rocks", "Rocks: " + Game.rocks);
+	set("coal", "Coal: " + Game.coal);
+	set("iron", "Iron: " + Game.iron);
+	set("quartz", "Quartz: " + Game.quartz);
 
 	let rocketLaunchButton = document.getElementById("launchRocket");
 
-	if (game.rocketBuilt) {
+	if (Game.rocketBuilt) {
 		rocketLaunchButton.style.display = "inline-block";
 	}
 	else {
@@ -36,21 +36,21 @@ function updateDisplay () {
 }
 
 function findRocks () {
-	foundRocks = rollDie(3);
+	GameState.foundRocks = rollDie(3);
 
 	if (foundRocks == 1) {
-		set("info", "You see " + foundRocks + " rock nearby...")
+		set("info", "You see " + GameState.foundRocks + " rock nearby...")
 	}
 
 	else {
-		set("info", "You see " + foundRocks + " rocks nearby...")
+		set("info", "You see " + GameState.foundRocks + " rocks nearby...")
 	}
 }
 
 function pickUpRocks () {
-	if (foundRocks) {
-		foundRocks -= 1;
-		game.rocks += 1;
+	if (GameState.foundRocks) {
+		GameState.foundRocks -= 1;
+		Game.rocks += 1;
 
 		if (!foundRocks) {
 			newInfo("You've picked up all the nearby rocks.");
@@ -61,8 +61,8 @@ function pickUpRocks () {
 }
 
 function breakRocks () {
-	if (game.rocks) {
-		game.rocks -= 1;
+	if (Game.rocks) {
+		Game.rocks -= 1;
 
 		const RewardOptions = ["coal", "iron", "quartz"];
 
@@ -70,8 +70,8 @@ function breakRocks () {
 		let rewardId = "";
 		let rewardAmount = rollDie(2);
 
-		game[rewardType] += rewardAmount;
-		
+		Game[rewardType] += rewardAmount;
+
 		let reward = rewardAmount + " " + rewardType;
 		newInfo("You were able to extract " + reward + " from inside :3");
 
@@ -80,13 +80,13 @@ function breakRocks () {
 }
 
 function buildTheRocket () {
-	if (game.iron >= RocketIronCost && game.quartz >= RocketQuartzCost) {
-		game.iron -= RocketIronCost;
-		game.quartz -= RocketQuartzCost;
+	if (Game.iron >= RocketIronCost && Game.quartz >= RocketQuartzCost) {
+		Game.iron -= RocketIronCost;
+		Game.quartz -= RocketQuartzCost;
 
 		newInfo("You have built the rocket!");
 
-		game.rocketBuilt = true;
+		Game.rocketBuilt = true;
 		
 
 		updateDisplay();
@@ -94,11 +94,11 @@ function buildTheRocket () {
 }
 
 function launchRocket () {
-	if (game.coal >= RocketFuelCost) {
-		let score = game.coal;
-		game.coal -= RocketFuelCost;
+	if (Game.coal >= RocketFuelCost) {
+		let score = Game.coal;
+		Game.coal -= RocketFuelCost;
 
-		set("coal", "Coal: " + game.coal);
+		set("coal", "Coal: " + Game.coal);
 		newInfo("You beat the game! Score: " + score)
 	}
 }
